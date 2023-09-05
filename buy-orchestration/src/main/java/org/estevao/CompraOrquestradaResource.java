@@ -1,7 +1,10 @@
 package org.estevao;
 
 import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("compra-orquestrada")
@@ -13,6 +16,9 @@ public class CompraOrquestradaResource {
     @Inject
     public PedidoService pedidoService;
 
+    @GET
+    @Path("compra")
+    @Produces(MediaType.TEXT_PLAIN)
     public Response saga() {
 
         return Response.ok().build();
