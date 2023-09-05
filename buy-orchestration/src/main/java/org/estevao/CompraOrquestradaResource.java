@@ -21,6 +21,15 @@ public class CompraOrquestradaResource {
     @Produces(MediaType.TEXT_PLAIN)
     public Response saga() {
 
+        // credito = 100
+
+        Long id = 0L;
+
+        comprar(++id, 20);
+        comprar(++id, 30);
+        comprar(++id, 50);
+        comprar(++id, 20);
+
         return Response.ok().build();
     }
 
@@ -28,9 +37,10 @@ public class CompraOrquestradaResource {
         pedidoService.newPedido(id);
         try {
             creditoService.newPedidoValor(id, valor);
+            System.out.println("Pedido " + id + " registrado no valor de: " + valor);
         } catch (IllegalStateException e) {
             pedidoService.cancelPedido(id);
-            System.err.println("Pedido" + id + "cancelado no valor de: " + valor);
+            System.err.println("Pedido " + id + " estornado no valor de: " + valor);
         }
     }
 
